@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Weather App</title>
-</head>
-<body>
-  <h1>Weather App</h1>
-  <p>Enter the name of a city to get the current weather:</p>
+  <head>
+    <title>Weather Forecast</title>
+  </head>
+  <body>
+    <h1>Weather Forecast</h1>
+    <p>Enter the name of a city to get the current weather:</p>
   <input type="text" id="city-input">
   <button type="button" id="get-weather-button">Get Weather</button>
-  <div id="weather-info"></div>
+    <h2>Current Weather</h2>
+    <div id="current-weather-container"></div>
 
-  <script src="mainpage.js"></script>
-</body>
+    <h2>5-Day Forecast</h2>
+    <div id="forecast-container"></div>
+
+    <script src="mainpage.js"></script>
+    <link rel="stylesheet" href="mainpage.css">
+  </body>
 </html>
