@@ -1,0 +1,100 @@
+#banner {
+    background-image: url(https://img.itch.zone/aW1hZ2UvNzY1NzU4LzQyODM0MTYucG5n/347x500/My%2FLcA.png);
+    font-weight: bold;
+    font-size: 100px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10;
+    height: 200px;
+    outline-style: dashed;
+
+}
+
+body {
+    margin: 0;
+    background-image: url(https://img.itch.zone/aW1hZ2UvNzY1NzU4LzQyODM0OTAucG5n/347x500/MsSm0D.png);
+    background-size: cover;
+}
+
+#style {
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+
+
+}
+
+#current-weather-container {
+    text-align: center;
+    outline-style: dashed;
+    margin-left: 500px;
+    margin-right: 500px;
+    font-weight: bold;
+
+
+
+}
+
+#forecast-container {
+    font-weight: bold;
+    font-size: large;
+    margin-top: 25px;
+    outline-style: dashed;
+    background-color: olive;
+    column-count: 5;
+    text-align: center;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#Forecast {
+    font-weight: bold;
+    font-size: 50px;
+    margin-bottom: 0;
+    border-bottom: black;
+
+}
+
+#temp {
+    border-top-style: solid ;
+    border-left-style: dashed;
+    border-right-style: dashed;
+    margin-bottom: 0px;
+    
+}
+
+h3 {
+    margin-top: 0;
+}
+
+#cond {
+    margin: top 0; 
+    border-left-style: dashed;
+    border-right-style: dashed;
+}
+
+#hum {
+    margin-top: 0;
+    border-left-style: dashed;
+    border-right-style: dashed;
+    border-bottom-style: solid;
+}
+#city{
+    width: 200px;
+    height: 25px;
+    color: olive;
+    font-size: large;
+}
+
+#submit-btn{
+    width: 150px;
+    height: 32px;
+    font-weight: bold;
+    background-color: black;
+    color: olive;
+    opacity: 0.6;
+  transition: 0.3s;
+}
+#submit-btn:hover{
+    cursor: pointer;
+    opacity: 1;}

@@ -38,9 +38,9 @@ function getWeather(city) {
         const forecastHtml = `
           <div class="forecast-card">
             <h3>${date.toLocaleDateString()}</h3>
-            <p>Temperature: ${forecast.main.temp}&deg;F</p>
-            <p>Conditions: ${forecast.weather[0].description}</p>
-            <p>Humidity: ${forecast.main.humidity}%</p>
+            <p id=temp>Temperature: ${forecast.main.temp}&deg;F</p>
+            <p id=cond>Conditions: ${forecast.weather[0].description}</p>
+            <p id= hum>Humidity: ${forecast.main.humidity}%</p>
           </div>
         `;
         forecastContainer.insertAdjacentHTML('beforeend', forecastHtml);
