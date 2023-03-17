@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Weather Forecast</title>
-  </head>
-  <body>
-    <h1>Weather Forecast</h1>
-    <p>Enter the name of a city to get the current weather:</p>
-  <input type="text" id="city-input">
-  <button type="button" id="get-weather-button">Get Weather</button>
-    <h2>Current Weather</h2>
+
+<head>
+    <meta charset="UTF-8">
+    <h1 id="banner">Weather App</h1>
+</head>
+
+<body>
     <div id="current-weather-container"></div>
-
-    <h2>5-Day Forecast</h2>
-    <div id="forecast-container"></div>
-
+    <div id="style">
+        <form>
+            <label for="city">Enter city name:</label>
+            <input type="text" id="city" name="city">
+            <button type="button" id="submit-btn">Get Weather</button>
+        </form>
+    </div>
+    <div id="forecast-container">5 day forecast</div>
     <script src="mainpage.js"></script>
     <link rel="stylesheet" href="mainpage.css">
-  </body>
+</body>
+
 </html>

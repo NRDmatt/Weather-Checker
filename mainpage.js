@@ -1,71 +1,50 @@
-const API_KEY = '637531b431f5488fbfa7a2779aeeeb58';
-const currentWeatherContainer = document.getElementById('current-weather-container');
-const forecastContainer = document.getElementById('forecast-container');
+const apiKey = '432dbb81ba4ef584ad1a12462d53bcc1';
 
-// Construct the API request URLs
-const city = 'alaska'; // Replace with user input
-const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`;
-const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${API_KEY}`;
+document.getElementById('submit-btn').addEventListener('click', function(event) {
+  event.preventDefault();
+  const city = document.getElementById('city').value;
+  getWeather(city);
+});
 
-// Make the API requests
-Promise.all([
-  fetch(currentWeatherUrl),
-  fetch(forecastUrl),
-])
-  .then(responses => Promise.all(responses.map(response => response.json())))
-  .then(data => {
-    // Display the current weather
-    const currentWeatherData = data[0];
-    const currentTemperature = currentWeatherData.main.temp;
-    const currentDescription = currentWeatherData.weather[0].description;
-
-    const currentWeatherElement = document.createElement('div');
-    currentWeatherElement.classList.add('current-weather');
-
-    const currentTemperatureElement = document.createElement('p');
-    currentTemperatureElement.textContent = `Temperature: ${currentTemperature} °F`;
-    currentWeatherElement.appendChild(currentTemperatureElement);
-
-    const currentDescriptionElement = document.createElement('p');
-    currentDescriptionElement.textContent = `Description: ${currentDescription}`;
-    currentWeatherElement.appendChild(currentDescriptionElement);
-
-    currentWeatherContainer.appendChild(currentWeatherElement);
-
-    // Display the 5-day forecast
-    const forecastData = data[1];
-    const forecastElements = forecastData.list.reduce((acc, forecast, index) => {
-      // Split the forecasts into 5-day periods
-      if (index % 8 === 0) {
-        const date = forecast.dt_txt.split(' ')[0];
-        const temperature = forecast.main.temp;
-        const description = forecast.weather[0].description;
-
-        // Create HTML elements to display the forecast information
-        const forecastElement = document.createElement('div');
-        forecastElement.classList.add('forecast');
-
-        const dateElement = document.createElement('h3');
-        dateElement.textContent = date;
-        forecastElement.appendChild(dateElement);
-
-        const temperatureElement = document.createElement('p');
-        temperatureElement.textContent = `Temperature: ${temperature} °F`;
-        forecastElement.appendChild(temperatureElement);
-
-        const descriptionElement = document.createElement('p');
-        descriptionElement.textContent = `Description: ${description}`;
-        forecastElement.appendChild(descriptionElement);
-
-        acc.push(forecastElement);
-      }
-
-      return acc;
-    }, []);
-
-    // Append the forecast elements to the forecast container in the HTML
-    forecastElements.forEach(element => {
-      forecastContainer.appendChild(element);
-    });
-  })
-  .catch(error => console.error(error));
+function getWeather(city) {
+  const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
+  
+ 
+  fetch(currentWeatherUrl)
+    .then(response => response.json())
+    .then(data => {
+      const currentWeatherContainer = document.getElementById('current-weather-container');
+      currentWeatherContainer.innerHTML = '';
+      const currentWeatherHtml = `
+        <h2>Current Weather in ${data.name}</h2>
+        <p>Temperature: ${data.main.temp}&deg;F</p>
+        <p>Conditions: ${data.weather[0].description}</p>
+        <p>Humidity: ${data.main.humidity}%</p>
+      `;
+      currentWeatherContainer.insertAdjacentHTML('beforeend', currentWeatherHtml);
+    })
+    .catch(error => console.log(error));
+    
+  
+  fetch(forecastUrl)
+    .then(response => response.json())
+    .then(data => {
+      const forecastContainer = document.getElementById('forecast-container');
+      forecastContainer.innerHTML = '';
+      const forecasts = data.list.filter(forecast => forecast.dt_txt.includes('12:00:00'));
+      forecasts.forEach(forecast => {
+        const date = new Date(forecast.dt * 1000);
+        const forecastHtml = `
+          <div class="forecast-card">
+            <h3>${date.toLocaleDateString()}</h3>
+            <p>Temperature: ${forecast.main.temp}&deg;F</p>
+            <p>Conditions: ${forecast.weather[0].description}</p>
+            <p>Humidity: ${forecast.main.humidity}%</p>
+          </div>
+        `;
+        forecastContainer.insertAdjacentHTML('beforeend', forecastHtml);
+      });
+    })
+    .catch(error => console.log(error));
+}
